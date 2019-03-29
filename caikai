@@ -1,0 +1,248 @@
+-<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>葡萄藤PPT</title>
+
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/reveal.css">
+
+    <!-- PPT主题，可以在/css/reveal/theme/中选择其他主题，目前暂时只能使用该模板 -->
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/css/reveal/theme/ptt.css">
+
+    <!-- syntax highlighting 代码高亮主题 -->
+    <link rel="stylesheet" href="https://ptteng.github.io/PPT/lib/reveal/css/zenburn.css">
+
+    <!-- 打印和PDF输出样式 -->
+    <script>
+        var link = document.createElement( 'link' );
+        link.rel = 'stylesheet';
+        link.type = 'text/css';
+        link.href = window.location.search.match( /print-pdf/gi ) ? 'https://ptteng.github.io/PPT/css/reveal/print/pdf.css' : '../css/reveal/print/paper.css';
+        document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+</head>
+<body>
+<img src="https://ptteng.github.io/PPT/img/demo/logo.png" alt="" usemap="#pttmap" class="base-logo">
+<map name="pttmap">
+    <area shape="rect" coords="0,0,276,58" href="http://www.jnshu.com" alt="" target="_blank"/>
+</map>
+<div class="reveal">
+    <div class="slides">
+        <section>
+            <h2>什么叫反向代理？为什么要使用反向代理？</h2>
+            <p>分享人：蔡凯</p>
+        </section>
+        <section>
+            <p>1.背景介绍</p>
+            <p>2.知识剖析</p>
+            <p>3.编码实战</p>
+            <p>4.常见问题</p>
+            <p>5.参考文献</p>
+            <p>6.更多讨论</p>
+        </section>
+        <section>
+            <h3>1.背景介绍</h3>
+        </section>
+
+
+        <section>
+
+            <h3>代理 </h3>
+            <p>在认识反向代理之前,我们要先了解一下代理,也就是正向代理</p>
+            <p>正向代理类似一个跳板机，代理访问外部资源</p>
+			<img src="https://images2015.cnblogs.com/blog/305504/201611/305504-20161112124853014-1532060796.png" >
+			<p>正向代理代理的对象是客户端,它隐藏了真实的请求客户端，服务端不知道真实的客户端是谁，客户端请求的服务都被代理服务器代替来请求</p>
+        </section>
+
+		<section>
+
+            <h3>反向代理</h3> 
+<img src="https://images2015.cnblogs.com/blog/305504/201611/305504-20161112124341280-1435223816.png" >			
+            <p>反向代理代理的对象是服务端,它隐藏了真实的服务端，当我们请求 www.baidu.com 的时候，就像拨打10086一样，背后可能有成千上万台服务器为我们服务，但具体是哪一台，你不知道，也不需要知道，你只需要知道反向代理服务器是谁就好了，www.baidu.com 就是我们的反向代理服务器，反向代理服务器会帮我们把请求转发到真实的服务器那里去。</p>       
+        </section>
+    
+
+        
+        <section>
+            <h3>2.知识剖析</h3>
+        </section>
+		<section>
+        
+            <h3>反向代理的作用</h3>
+			<p>（1）保证内网的安全，可以使用反向代理提供WAF功能，阻止web攻击</p>
+			<p>（2）负载均衡，通过反向代理服务器来优化网站的负载</p>
+			<img src="https://images2015.cnblogs.com/blog/305504/201611/305504-20161112124423530-566240666.png">
+
+        </section>
+		<section>
+                    <h3>保证内网安全</h3> 
+                    
+                     <p> 在防火墙外部设置一个代理服务器作为内容服务器的替身。当外部客户机尝试访问内容服务器时，会将其送到代理服务器。实际内容位于内容服务器上，在防火墙内部受到安全保护。
+					 代理服务器位于防火墙外部，在客户机看来就像是内容服务器。
+                   当客户机向站点提出请求时，请求将转到代理服务器。然后，代理服务器通过防火墙中的特定通路，将客户机的请求发送到内容服务器。内容服务器再通过该通道将结果回传给代理服务器。代理服务器将检索到的信息发送给客户机，好像代理服务器就是实际的内容服务器。
+				   如果内容服务器返回错误消息，代理服务器会先行截取该消息并更改标头中列出的任何 URL，然后再将消息发送给客户机。</p>
+                </section>
+        
+        <section>
+		<h3>保证内网安全</h3>  
+                     <p>如此可防止外部客户机获取内部内容服务器的重定向 URL。
+                  这样，代理服务器就在安全数据库和可能的恶意攻击之间提供了又一道屏障。与有权访问整个数据库的情况相对比，就算是侥幸攻击成功，作恶者充其量也仅限于访问单个事务中所涉及的信息。
+				  未经授权的用户无法访问到真正的内容服务器，因为防火墙通路只允许代理服务器有权进行访问。</p>
+		</section>
+		<section>
+                    <h3>负载均衡</h3> 
+                    
+                     <p> 在一个组织内使用多个代理服务器来平衡各 Web 服务器间的网络负载。
+在此模型中，可以利用代理服务器的高速缓存特性，创建一个用于负载平衡的服务器池。此时，代理服务器可以位于防火墙的任意一侧。
+如果 Web 服务器每天都会接收大量的请求，则可以使用代理服务器分担 Web 服务器的负载并提高网络访问效率。
+对于客户机发往真正服务器的请求，代理服务器起着中间调停者的作用。代理服务器会将所请求的文档存入高速缓存。
+</p>
+                </section>
+        
+        <section>
+		<h3>负载均衡</h3>         
+                     <p> 如果有不止一个代理服务器，DNS 可以采用“循环复用法”选择其 IP 地址，随机地为请求选择路由。
+客户机每次都使用同一个 URL，但请求所采取的路由每次都可能经过不同的代理服务器。
+可以使用多个代理服务器来处理对一个高用量内容服务器的请求，这样做的好处是内容服务器可以处理更高的负载，并且比其独自工作时更有效率。
+在初始启动期间，代理服务器首次从内容服务器检索文档，此后，对内容服务器的请求数会大大下降。</p>
+                </section>
+        
+		
+        <section>
+                <h3>nginx服务器</h3>
+                <p>Nginx (engine x) 是一个高性能的HTTP和反向代理服务，也是一个IMAP/POP3/SMTP服务。Nginx是由伊戈尔·赛索耶夫为俄罗斯访问量第二的Rambler.ru站点（俄文：Рамблер）开发的，第一个公开版本0.1.0发布于2004年10月4日。
+其将源代码以类BSD许可证的形式发布，因它的稳定性、丰富的功能集、示例配置文件和低系统资源的消耗而闻名。2011年6月1日，nginx 1.0.4发布。
+Nginx是一款轻量级的Web 服务器/反向代理服务器及电子邮件（IMAP/POP3）代理服务器，并在一个BSD-like 协议下发行。其特点是占有内存少，并发能力强，事实上nginx的并发能力确实在同类型的网页服务器中表现较好，有很多人都在用。</p>
+
+            </section>
+
+            <section>
+                    <h3>nginx反向代理</h3>
+                    <p>nginx反向代理的指令不需要新增额外的模块，默认自带proxy_pass指令，只需要修改配置文件就可以实现反向代理。</p>
+					<p>upstream tomcatserver1 {
+	server 192.168.3.43:8080;
+    }
+    upstream tomcatserver2 {
+	server 192.168.3.43:8082;
+    }
+   server {
+        listen       80;
+        server_name  8080.zcinfo.com;
+ 
+        #charset koi8-r;
+ 
+        #access_log  logs/host.access.log  main;
+ 
+        location / {
+            proxy_pass   http://tomcatserver1;
+            index  index.html index.htm;
+        }  
+    }
+  
+</p>
+                
+                </section>
+
+<section>
+                    <h3>nginx反向代理</h3>
+					<p>  server {
+        listen       80;
+        server_name  8082.zcinfo.com;
+ 
+        #charset koi8-r;
+ 
+        #access_log  logs/host.access.log  main;
+ 
+        location / {
+            proxy_pass   http://tomcatserver2;
+            index  index.html index.htm;
+        }
+    }</p>
+					</section>
+        <section>
+		
+            <h3>3.编码实战</h3>
+			
+        </section>
+
+       
+        <section>
+		
+            <h3>4.常见问题</h3>
+           <p>DNS</p> 
+     <p> 域名系统（英文：Domain Name System，缩写：DNS）是互联网的一项服务。
+	 它作为将域名和IP地址相互映射的一个分布式数据库，能够使人更方便地访问互联网。</p>
+       
+    
+    </section>
+    
+    <section>
+            <h3>4.常见问题</h3>
+            <p>循环复用法 </p>
+
+      <p>DNS如果发现主机的多个资源记录，则循环使用包含在查询应答中的主机记录。
+	  缺点:
+	  循环复用 DNS 使用 DNS将传入的 IP 请求映射到定义的一系列循环形式的服务器。一旦发生服务器故障，循环复用 DNS 继续把请求发送到这个故障服务器，一直到把该服务器从 DNS 中移走为止。这样许多用户必须等到 DNS 连接超时以后才能成功地访问目标网站。</p> 
+		
+</section>
+    
+        <section>
+		
+            <h3>5.参考资料</h3>
+            <P>https://my.oschina.net/jasonwung/blog/665324</P>
+			<P>https://www.cnblogs.com/anruy/p/4989161.html</P>
+			<P>https://blog.csdn.net/u013144287/article/details/78551398</P>
+			<P>https://www.zhihu.com/question/24723688/answer/48369770</P>
+			<P>https://www.cnblogs.com/Anker/p/6056540.html</P>
+        </section>
+
+        <section>
+            <h3>6.更多讨论</h3>
+            <p></p>
+        </section>
+
+        <section>
+		
+            <h3>鸣谢</h3>
+            <p>感谢观看,如有出错,恳请指正</p>
+           
+        </section>
+
+    </div>
+    <script src="https://ptteng.github.io/PPT/lib/reveal/js/head.min.js"></script>
+<script src="https://ptteng.github.io/PPT/lib/reveal/reveal.js"></script>
+
+<script>
+    // 以下为常见配置属性的默认值
+    // {
+    // 	controls: true, // 是否在右下角展示控制条
+    // 	progress: true, // 是否显示演示的进度条
+    // 	slideNumber: false, // 是否显示当前幻灯片的页数编号，也可以使用代码slideNumber: 'c / t' ，表示当前页/总页数。
+    // 	history: false, // 是否将每个幻灯片改变加入到浏览器的历史记录中去
+    // 	keyboard: true, // 是否启用键盘快捷键来导航
+    // 	overview: true, // 是否启用幻灯片的概览模式，可使用"Esc"或"o"键来切换概览模式
+    // 	center: true, // 是否将幻灯片垂直居中
+    // 	touch: true, // 是否在触屏设备上启用触摸滑动切换
+    // 	loop: false, // 是否循环演示
+    // 	rtl: false, // 是否将演示的方向变成RTL，即从右往左
+    // 	fragments: true, // 全局开启和关闭碎片。
+    // 	autoSlide: 0, // 两个幻灯片之间自动切换的时间间隔（毫秒），当设置成 0 的时候则禁止自动切换，该值可以被幻灯片上的 ` data-autoslide` 属性覆盖
+    // 	transition: 'default', // 切换过渡效果，有none/fade/slide/convex/concave/zoom
+    // 	transitionSpeed: 'default', // 过渡速度，default/fast/slow
+    // 	mouseWheel: true, //是否启用通过鼠标滚轮来切换幻灯片
+    // }
+    // 初始化幻灯片
+    Reveal.initialize({
+        history: true,
+        dependencies: [
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/marked.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/markdown/markdown.js' },
+            { src: 'https://ptteng.github.io/PPT/plugin/notes/notes.js', async: true },
+            { src: 'https://ptteng.github.io/PPT/plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ]
+    });
+</script>
+</body>
+</html>
